@@ -10,8 +10,9 @@
                                 <i class="fa-solid fa-bars"></i>
                             </span>
                         </button>
-                        <a href="index.html" class="web-logo nav-logo">
-                            <img src="../assets/images/logo/1.png" class="img-fluid blur-up lazyload" alt="">
+                        <a href="{{ route('home') }}" class="web-logo nav-logo">
+                            <img src="{{ $logo }}" class="img-fluid blur-up lazyload"
+                                alt="{{ shopper_setting('shop_name') }}" style="max-height: 50px;">
                         </a>
 
                         <div class="middle-box">
@@ -43,8 +44,8 @@
                                             <i data-feather="phone-call"></i>
                                         </div>
                                         <div class="delivery-detail">
-                                            <h6>24/7 Delivery</h6>
-                                            <h5>+91 888 104 2340</h5>
+                                            <h6>Entrega 24/7</h6>
+                                            <h5>{{ shopper_setting('shop_phone_number') }}</h5>
                                         </div>
                                     </a>
                                 </li>

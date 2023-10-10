@@ -6,21 +6,11 @@
                     <div class="service-contain">
                         <div class="service-box">
                             <div class="service-image">
-                                <img src="{{ asset('svg/product.svg') }}" class="blur-up lazyload" alt="">
-                            </div>
-
-                            <div class="service-detail">
-                                <h5>Every Fresh Products</h5>
-                            </div>
-                        </div>
-
-                        <div class="service-box">
-                            <div class="service-image">
                                 <img src="{{ asset('svg/delivery.svg') }}" class="blur-up lazyload" alt="">
                             </div>
 
                             <div class="service-detail">
-                                <h5>Free Delivery For Order Over $50</h5>
+                                <h5>Entrega gratuita para pedidos superiores a $50,000</h5>
                             </div>
                         </div>
 
@@ -30,7 +20,7 @@
                             </div>
 
                             <div class="service-detail">
-                                <h5>Daily Mega Discounts</h5>
+                                <h5>Megadescuentos diarios</h5>
                             </div>
                         </div>
 
@@ -40,7 +30,7 @@
                             </div>
 
                             <div class="service-detail">
-                                <h5>Best Price On The Market</h5>
+                                <h5>El mejor precio del mercado</h5>
                             </div>
                         </div>
                     </div>
@@ -53,23 +43,19 @@
                 <div class="col-xl-3 col-lg-4 col-sm-6">
                     <div class="footer-logo">
                         <div class="theme-logo">
-                            <a href="index.html">
-                                <img src="../assets/images/logo/1.png" class="blur-up lazyload" alt="">
+                            <a href="{{ route('home') }}">
+                                <img src="{{ $logo }}" class="blur-up lazyload"
+                                    alt="{{ shopper_setting('shop_name') }}" style="max-height: 50px;">
                             </a>
                         </div>
 
                         <div class="footer-logo-contain">
-                            <p>We are a friendly bar serving a variety of cocktails, wines and beers. Our bar is a
-                                perfect place for a couple.</p>
+                            {!! shopper_setting('shop_about') !!}
 
                             <ul class="address">
                                 <li>
                                     <i data-feather="home"></i>
-                                    <a href="javascript:void(0)">1418 Riverwood Drive, CA 96052, US</a>
-                                </li>
-                                <li>
-                                    <i data-feather="mail"></i>
-                                    <a href="javascript:void(0)">support@fastkart.com</a>
+                                    <a href="javascript:void(0)">{{ shopper_setting('shop_street_address') }}</a>
                                 </li>
                             </ul>
                         </div>
@@ -78,42 +64,31 @@
 
                 <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
                     <div class="footer-title">
-                        <h4>Categories</h4>
+                        <h4>Categorías</h4>
                     </div>
 
                     <div class="footer-contain">
                         <ul>
-                            <li>
-                                <a href="shop-left-sidebar.html" class="text-content">Vegetables & Fruit</a>
-                            </li>
-                            <li>
-                                <a href="shop-left-sidebar.html" class="text-content">Beverages</a>
-                            </li>
-                            <li>
-                                <a href="shop-left-sidebar.html" class="text-content">Meats & Seafood</a>
-                            </li>
-                            <li>
-                                <a href="shop-left-sidebar.html" class="text-content">Frozen Foods</a>
-                            </li>
-                            <li>
-                                <a href="shop-left-sidebar.html" class="text-content">Biscuits & Snacks</a>
-                            </li>
-                            <li>
-                                <a href="shop-left-sidebar.html" class="text-content">Grocery & Staples</a>
-                            </li>
+                            @foreach ($this->categories as $category)
+                                <li>
+                                    <a href="{{ route('category.show', $category->slug) }}" class="text-content">
+                                        {{ $category->name }}
+                                    </a>
+                                </li>
+                            @endforeach
                         </ul>
                     </div>
                 </div>
 
                 <div class="col-xl col-lg-2 col-sm-3">
                     <div class="footer-title">
-                        <h4>Useful Links</h4>
+                        <h4>Enlaces útiles</h4>
                     </div>
 
                     <div class="footer-contain">
                         <ul>
                             <li>
-                                <a href="index.html" class="text-content">Home</a>
+                                <a href="{{ route('home') }}" class="text-content">Inicio</a>
                             </li>
                             <li>
                                 <a href="shop-left-sidebar.html" class="text-content">Shop</a>
@@ -162,7 +137,7 @@
 
                 <div class="col-xl-3 col-lg-4 col-sm-6">
                     <div class="footer-title">
-                        <h4>Contact Us</h4>
+                        <h4>Contáctenos</h4>
                     </div>
 
                     <div class="footer-contact">
@@ -171,8 +146,11 @@
                                 <div class="footer-number">
                                     <i data-feather="phone"></i>
                                     <div class="contact-number">
-                                        <h6 class="text-content">Hotline 24/7 :</h6>
-                                        <h5>+91 888 104 2340</h5>
+                                        <h6 class="text-content">Línea directa 24/7:</h6>
+                                        <h5>
+                                            <a
+                                                href="tel:{{ shopper_setting('shop_phone_number') }}">{{ shopper_setting('shop_phone_number') }}</a>
+                                        </h5>
                                     </div>
                                 </div>
                             </li>
@@ -181,28 +159,13 @@
                                 <div class="footer-number">
                                     <i data-feather="mail"></i>
                                     <div class="contact-number">
-                                        <h6 class="text-content">Email Address :</h6>
-                                        <h5>fastkart@hotmail.com</h5>
+                                        <h6 class="text-content">Correo electrónico:</h6>
+                                        <h5>
+                                            <a
+                                                href="mailto:{{ shopper_setting('shop_email') }}">{{ shopper_setting('shop_email') }}</a>
+                                        </h5>
                                     </div>
                                 </div>
-                            </li>
-
-                            <li class="social-app">
-                                <h5 class="mb-2 text-content">Download App :</h5>
-                                <ul>
-                                    <li class="mb-0">
-                                        <a href="https://play.google.com/store/apps" target="_blank">
-                                            <img src="../assets/images/playstore.svg" class="blur-up lazyload"
-                                                alt="">
-                                        </a>
-                                    </li>
-                                    <li class="mb-0">
-                                        <a href="https://www.apple.com/in/app-store/" target="_blank">
-                                            <img src="../assets/images/appstore.svg" class="blur-up lazyload"
-                                                alt="">
-                                        </a>
-                                    </li>
-                                </ul>
                             </li>
                         </ul>
                     </div>
@@ -212,38 +175,47 @@
 
         <div class="sub-footer section-small-space">
             <div class="reserve">
-                <h6 class="text-content">©2022 Fastkart All rights reserved</h6>
+                <h6 class="text-content">©{{ $year }} <a href="https://pixxeles.com" target="_blank"
+                        rel="noopener noreferrer">Pixxeles</a> Todos los derechos reservados
+                </h6>
             </div>
 
             <div class="payment">
-                <img src="../assets/images/payment/1.png" class="blur-up lazyload" alt="">
+                <img src="{{ asset('img/payment/1.png') }}" class="blur-up lazyload" alt="Métodos de pago">
             </div>
 
-            <div class="social-link">
-                <h6 class="text-content">Stay connected :</h6>
-                <ul>
-                    <li>
-                        <a href="https://www.facebook.com/" target="_blank">
-                            <i class="fa-brands fa-facebook-f"></i>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="https://twitter.com/" target="_blank">
-                            <i class="fa-brands fa-twitter"></i>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="https://www.instagram.com/" target="_blank">
-                            <i class="fa-brands fa-instagram"></i>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="https://in.pinterest.com/" target="_blank">
-                            <i class="fa-brands fa-pinterest-p"></i>
-                        </a>
-                    </li>
-                </ul>
-            </div>
+            @if (shopper_setting('shop_facebook_link') ||
+                    shopper_setting('shop_instagram_link') ||
+                    shopper_setting('shop_twitter_link'))
+                <div class="social-link">
+                    <h6 class="text-content">Mantente conectado:</h6>
+                    <ul>
+                        @if ($link = shopper_setting('shop_facebook_link'))
+                            <li>
+                                <a href="{{ $link }}" target="_blank">
+                                    <i class="fa-brands fa-facebook-f"></i>
+                                </a>
+                            </li>
+                        @endif
+
+                        @if ($link = shopper_setting('shop_instagram_link'))
+                            <li>
+                                <a href="{{ $link }}" target="_blank">
+                                    <i class="fa-brands fa-instagram"></i>
+                                </a>
+                            </li>
+                        @endif
+
+                        @if ($link = shopper_setting('shop_twitter_link'))
+                            <li>
+                                <a href="{{ $link }}" target="_blank">
+                                    <i class="fa-brands fa-twitter"></i>
+                                </a>
+                            </li>
+                        @endif
+                    </ul>
+                </div>
+            @endif
         </div>
     </div>
 </footer>

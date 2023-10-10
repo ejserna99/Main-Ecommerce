@@ -59,7 +59,7 @@ return [
 
     'storage' => [
         'collection_name' => 'uploads',
-        'disk_name' => 'public',
+        'disk_name' => 'uploads',
     ],
 
     /*

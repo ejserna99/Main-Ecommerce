@@ -7,10 +7,12 @@ use Livewire\Component;
 
 class Header extends Component
 {
+    public $logo;
     public $storageName;
 
     public function mount()
     {
+        $this->logo = shopper_asset(shopper_setting('shop_logo'));
         $this->storageName = config('shopper.core.storage.collection_name');
     }
 
