@@ -31,7 +31,7 @@
                                 @endif
                             </div>
 
-                            <div class="product-rating">
+                            <div wire:ignore class="product-rating">
                                 <x-rating :rating="$product->ratingPercent()" />
                                 <span class="ms-2">{{ $product->countRating() }} Reseñas</span>
                             </div>
@@ -81,8 +81,10 @@
                             @if ($product->variations->count() > 0)
                                 <div class="select-size">
                                     <h4>Opciones:</h4>
-                                    <select class="form-select select-form-size">
-                                        <option value="{{ $product->id }}" selected>Selecciona una opción</option>
+                                    <select class="form-select form-control" wire:model="variant"
+                                        style="width: 260px; height: 40px;">
+                                        <option value="{{ $product->id }}" selected>
+                                            {{ str_limit($product->name, 26) }}</option>
 
                                         @foreach ($product->variations as $variation)
                                             @if (!$variation->is_visible)
@@ -90,7 +92,7 @@
                                             @endif
 
                                             <option value="{{ $variation->id }}">
-                                                {{ $variation->name }} -
+                                                {{ str_limit($variation->name, 20) }} -
                                                 ${{ $variation->getPriceAmount()?->formated ?? '0' }}
                                             </option>
                                         @endforeach
@@ -98,10 +100,50 @@
                                 </div>
                             @endif
 
-                            <div class="modal-button">
-                                <button onclick="location.href = 'cart.html';" class="btn btn-md add-cart-button icon">
-                                    Añadir al carrito
-                                </button>
+                            @if ($product->getPriceAmount() && $this->currentProduct->stock > 0)
+                                <div class="qty-box product-qty m-0">
+                                    <div class="select-size">
+                                        <h4>Cantidad:</h4>
+                                        <div class="input-group h-100">
+                                            <button type="button" wire:click="decrement" wire:loading.attr="disabled"
+                                                wire:target="decrement" @disabled(!$this->canDecrement)>
+                                                <i class="fa fa-minus" aria-hidden="true"></i>
+                                            </button>
+
+                                            <input class="form-control input-number qty-input" type="number"
+                                                wire:model="quantity" min="0">
+
+                                            <button type="button" wire:click="increment" wire:loading.attr="disabled"
+                                                wire:target="increment" @disabled(!$this->canIncrement)>
+                                                <i @class([
+                                                    'fa fa-plus' => $this->canIncrement,
+                                                    'fas fa-ban text-danger' => !$this->canIncrement,
+                                                ]) aria-hidden="true"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endif
+
+                            <div class="modal-button align-items-center">
+                                @if ($product->getPriceAmount() && $this->currentProduct->stock > 0)
+                                    <button wire:click="addToCart" wire:loading.attr="disabled"
+                                        class="btn btn-md add-cart-button icon">
+                                        Añadir al carrito
+
+                                        <div wire:loading wire:target="addToCart" class="spinner-border text-light ms-2"
+                                            role="status" style="width: 1rem; height: 1rem;">
+                                            <span class="visually-hidden">Loading...</span>
+                                        </div>
+                                    </button>
+                                @elseif ($this->currentProduct->stock < 1)
+                                    <p class="text-danger">Sin inventario</p>
+                                @else
+                                    <a href="#" class="btn btn-md add-cart-button icon">
+                                        <span>Contactar</span>
+                                        <i class="fa fa-whatsapp ms-2"></i>
+                                    </a>
+                                @endif
 
                                 <a href="{{ route('product.show', $product->slug) }}"
                                     class="btn theme-bg-color view-button icon text-white fw-bold btn-md">

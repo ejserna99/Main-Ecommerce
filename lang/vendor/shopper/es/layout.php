@@ -37,7 +37,7 @@ return [
             'type' => 'Tipo',
             'value' => 'Valor',
             'browse' => 'Examinar',
-            'sort_by' => 'Ordenar por',
+            'sort_by' => 'Ordenar',
             'subscribed' => 'Subscrito',
             'not_subscribed' => 'No Subscrito',
             'email_subscription' => 'Suscripción por Correo Electrónico',

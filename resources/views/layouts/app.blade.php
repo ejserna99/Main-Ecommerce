@@ -31,6 +31,7 @@
 
     <!-- Template css -->
     <link id="color-link" rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/custom-style.css') }}">
 
     @livewireStyles
 
@@ -54,6 +55,8 @@
 
     @livewire('modals')
 
+    @livewireScripts
+
     <!-- latest jquery-->
     <script src="{{ asset('js/vendors/jquery/jquery-3.6.0.min.js') }}"></script>
 
@@ -74,10 +77,15 @@
     <!-- Quantity js -->
     <script src="{{ asset('js/quantity-2.js') }}"></script>
 
-    @livewireScripts
+    <!-- script js -->
+    <script src="{{ asset('js/script.js') }}"></script>
 
     <!-- Livewire Nootstrap Modal -->
     <script src="{{ asset('vendor/livewire-bootstrap-modal/js/modals.js') }}"></script>
+
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <x-livewire-alert::scripts />
 
     @stack('extra-js')
 </body>

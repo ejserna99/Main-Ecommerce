@@ -4,9 +4,12 @@ namespace App\Http\Livewire\Site\Components\Home;
 
 use Livewire\Component;
 use App\Core\Repositories\Store\CollectionRepository;
+use App\Traits\Cart\ShoppingCart;
 
 class CollectionProductsSection extends Component
 {
+    use ShoppingCart;
+
     public ?string $slug;
     public $storageName;
 
@@ -30,6 +33,7 @@ class CollectionProductsSection extends Component
 
     public function render()
     {
+        // dd( $this->cartItems->firstWhere('id', 8));
         // dd($this->products->first()->getFirstMediaUrl('uploads', 'thumb_200'));
         return view('livewire.site.components.home.collection-products-section');
     }
