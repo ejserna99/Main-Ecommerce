@@ -54,7 +54,7 @@ return [
     |
     */
 
-    'product' => \Shopper\Core\Models\Product::class,
+    'product' => \App\Models\Product::class,
 
     /*
     |--------------------------------------------------------------------------
